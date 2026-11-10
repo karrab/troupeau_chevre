@@ -10,6 +10,11 @@ use App\Core\Auth;
 use App\Core\Csrf;
 use App\Core\View;
 
+// Première utilisation : redirection vers l'installateur web
+if (!\App\Services\Installer::isLocked()) {
+    redirect(app_base() . '/install.php');
+}
+
 $routes = require ROOT_PATH . '/app/routes.php';
 $route  = is_string($_GET['r'] ?? null) ? trim($_GET['r'], '/') : '';
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';

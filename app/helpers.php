@@ -19,10 +19,27 @@ function config(string $key, mixed $default = null): mixed
     return $cfg;
 }
 
+/**
+ * Chemin web de public/ : valeur de config 'app.base_url', sinon détecté automatiquement
+ * (ex. /troupeau/public lorsque l'application est dans un sous-dossier d'Apache/WAMP/XAMPP).
+ */
+function app_base(): string
+{
+    static $base = null;
+    if ($base === null) {
+        $base = (string) config('app.base_url', '');
+        if ($base === '' && PHP_SAPI !== 'cli') {
+            $base = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+        }
+        $base = rtrim($base, '/');
+    }
+    return $base;
+}
+
 /** URL d'une route : url('animaux/voir', ['id' => 5]) */
 function url(string $route = '', array $params = []): string
 {
-    $base = rtrim((string) config('app.base_url', ''), '/') . '/index.php';
+    $base = app_base() . '/index.php';
     $q = $route !== '' ? ['r' => $route] + $params : $params;
     $q = array_filter($q, fn($v) => $v !== null && $v !== '');
     return $base . ($q ? '?' . str_replace('%2F', '/', http_build_query($q)) : '');
@@ -41,7 +58,7 @@ function asset(string $path): string
 {
     $file = dirname(__DIR__) . '/public/assets/' . $path;
     $v = is_file($file) ? filemtime($file) : 1;
-    return rtrim((string) config('app.base_url', ''), '/') . '/assets/' . $path . '?v=' . $v;
+    return app_base() . '/assets/' . $path . '?v=' . $v;
 }
 
 function redirect(string $url): never

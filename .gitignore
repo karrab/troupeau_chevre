@@ -6,3 +6,4 @@
 !/storage/cache/.gitkeep
 .idea/
 .vscode/
+/storage/installed.lock

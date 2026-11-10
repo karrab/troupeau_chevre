@@ -31,36 +31,46 @@ Système d'information complet (PHP 8 / MySQL InnoDB / Bootstrap 5) pour gérer 
 
 ## Installation
 
-Prérequis : PHP ≥ 8.1 (pdo_mysql, mbstring ; opcache et apcu recommandés), MySQL 8 ou MariaDB ≥ 10.5, Composer.
+Prérequis : PHP ≥ 8.1 (pdo_mysql, mbstring ; opcache et apcu recommandés), MySQL 8 ou MariaDB ≥ 10.5.
 
-```bash
-composer install --no-dev -o
-```
+### Installation par le navigateur (WAMP, XAMPP, Laragon, hébergement mutualisé)
+
+1. Copier le projet dans le dossier web, par exemple `C:\wamp64\www\troupeau`.
+2. (Recommandé, pour l'export PDF) dans ce dossier :
+
+   ```bash
+   composer install --no-dev -o
+   ```
+
+3. Ouvrir **http://localhost/troupeau/** : l'installateur s'affiche automatiquement
+   (adresse directe : `http://localhost/troupeau/public/install.php`).
+4. Saisir les accès MySQL (souvent `root` sans mot de passe en local), cocher éventuellement le troupeau de
+   démonstration, puis **Installer**. La base est créée, `config/config.local.php` est écrit et
+   l'installateur se verrouille (`storage/installed.lock`).
+5. Se connecter avec **admin / Admin@123** (un nouveau mot de passe est exigé).
+
+> Les dossiers `app/`, `config/`, `database/`, `storage/` et `views/` sont volontairement interdits au
+> navigateur (`.htaccess`) : n'ouvrez pas `database/install.php` dans le navigateur, c'est la version
+> en ligne de commande. Apache doit avoir `mod_rewrite` activé et `AllowOverride All` sur le dossier.
+> Pour réinstaller, supprimez `storage/installed.lock`.
+
+### Installation en ligne de commande
 
 ```bash
 cp config/config.local.example.php config/config.local.php
 ```
 
-Renseigner les accès MySQL dans `config/config.local.php`, puis :
+Renseigner les accès MySQL dans `config/config.local.php`, puis (ajouter `--demo` pour le troupeau de démonstration) :
 
 ```bash
 php database/install.php
 ```
 
-Pour ajouter un troupeau de démonstration (~800 animaux sur 4 ans) :
-
-```bash
-php database/install.php --demo
-```
-
-La racine web doit pointer sur `public/` (sinon le `.htaccess` racine redirige vers `public/`).
-Pour un test local :
+Serveur de test intégré :
 
 ```bash
 php -S localhost:8000 -t public
 ```
-
-Connexion initiale : **admin / Admin@123** — un nouveau mot de passe est exigé à la première connexion.
 
 > Sans Dompdf (`composer install` non exécuté), les boutons PDF ouvrent une page optimisée pour l'impression
 > et la boîte « Imprimer / Enregistrer en PDF » du navigateur.
