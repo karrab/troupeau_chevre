@@ -1,0 +1,6 @@
+# Si la racine web pointe sur le dossier du projet (hébergement mutualisé),
+# on redirige vers public/ et on interdit l'accès au reste.
+RewriteEngine On
+RewriteRule ^$ public/ [L]
+RewriteCond %{REQUEST_URI} !^/?public/
+RewriteRule ^(.*)$ public/$1 [L]

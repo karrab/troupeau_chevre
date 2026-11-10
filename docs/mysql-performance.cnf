@@ -1,0 +1,17 @@
+# =====================================================================
+#  Réglages MySQL 8 / MariaDB recommandés (my.cnf, section [mysqld])
+# =====================================================================
+[mysqld]
+default_storage_engine         = InnoDB
+character-set-server           = utf8mb4
+collation-server               = utf8mb4_unicode_ci
+# ~50-70 % de la RAM sur un serveur dédié à la base
+innodb_buffer_pool_size        = 1G
+innodb_log_file_size           = 256M
+innodb_flush_log_at_trx_commit = 1
+innodb_flush_method            = O_DIRECT
+innodb_file_per_table          = 1
+# Journal des requêtes lentes pour vérifier l'usage des index
+slow_query_log                 = 1
+long_query_time                = 0.5
+log_queries_not_using_indexes  = 0

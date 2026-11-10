@@ -1,0 +1,37 @@
+:root {
+  --app-green: #2f6b3a;
+  --app-green-dark: #234f2b;
+}
+body { background: #f5f7f4; }
+.app-navbar { background: var(--app-green); }
+.app-sidebar { background: #fff; min-height: calc(100vh - 56px); border-right: 1px solid #e3e7e2; }
+@media (min-width: 992px) { .app-sidebar { position: sticky; top: 56px; } }
+.app-sidebar .nav-link { color: #344; border-radius: .5rem; }
+.app-sidebar .nav-link:hover { background: #eef4ee; }
+.app-sidebar .nav-link.active { background: var(--app-green); color: #fff; }
+.card { border: 0; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+.stat-card .display-6 { font-weight: 600; }
+.table thead th { white-space: nowrap; font-size: .85rem; text-transform: uppercase; color: #667; letter-spacing: .02em; }
+.table td { vertical-align: middle; }
+.timeline { border-left: 2px solid #dfe5de; margin-left: .75rem; padding-left: 1.25rem; }
+.timeline-item { position: relative; margin-bottom: 1rem; }
+.timeline-item::before { content: ""; position: absolute; left: -1.72rem; top: .35rem; width: .8rem; height: .8rem; border-radius: 50%; background: var(--bs-secondary); border: 2px solid #fff; }
+.timeline-item.tl-success::before { background: var(--bs-success); }
+.timeline-item.tl-warning::before { background: var(--bs-warning); }
+.timeline-item.tl-danger::before  { background: var(--bs-danger); }
+.timeline-item.tl-info::before    { background: var(--bs-info); }
+.timeline-item.tl-primary::before { background: var(--bs-primary); }
+.timeline-item.tl-dark::before    { background: var(--bs-dark); }
+.formula { font-family: SFMono-Regular, Menlo, Consolas, monospace; font-size: .85rem; }
+.var-chip { cursor: pointer; font-family: monospace; }
+.autocomplete-list { position: absolute; z-index: 1050; max-height: 240px; overflow-y: auto; width: 100%; }
+.login-card { max-width: 420px; }
+.filter-card summary { cursor: pointer; list-style: none; }
+.cell-indice { min-width: 110px; }
+@media print {
+  body { background: #fff; }
+  main { width: 100% !important; }
+  .card { box-shadow: none; border: 1px solid #ccc; }
+  a { text-decoration: none; color: #000; }
+  .tab-content > .tab-pane { display: block !important; opacity: 1 !important; }
+}

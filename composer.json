@@ -1,0 +1,26 @@
+{
+    "name": "troupeau/si-troupeau",
+    "description": "Système d'information de gestion de troupeau caprin et ovin",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.1",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "ext-mbstring": "*",
+        "dompdf/dompdf": "^3.0"
+    },
+    "suggest": {
+        "ext-apcu": "Cache applicatif en mémoire (fortement recommandé)",
+        "ext-opcache": "Cache du bytecode PHP (fortement recommandé)"
+    },
+    "autoload": {
+        "psr-4": { "App\\": "app/" },
+        "files": ["app/helpers.php"]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "classmap-authoritative": false,
+        "sort-packages": true
+    }
+}
